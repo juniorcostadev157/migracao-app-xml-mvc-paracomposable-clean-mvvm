@@ -2,8 +2,8 @@ package com.junior.migracaosevenmvvmcompose.data.repository.remote
 
 import com.junior.migracaosevenmvvmcompose.data.datasource.remote.FireBaseSolicitacaoDataSource
 import com.junior.migracaosevenmvvmcompose.data.model.SolicitacaoCheckInResponse
-import com.junior.migracaosevenmvvmcompose.data.model.SolicitacaoFerramentalResponse
 import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoEquipamentos
+import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoFerramental
 import com.junior.migracaosevenmvvmcompose.domain.model.toDomain
 import com.junior.migracaosevenmvvmcompose.domain.repository.SolicitacaoRepository
 import kotlinx.coroutines.flow.Flow
@@ -31,8 +31,12 @@ class SolicitacaoRepositoryImpl @Inject constructor(
         solicitacaoDataSource.updateStatusSolicitacao(id, status)
     }
 
-    override fun listSolicitacaoFerramental(login: String): Flow<List<SolicitacaoFerramentalResponse>> {
-        return solicitacaoDataSource.listSolicitacaoFerramental(login)
+    override fun listSolicitacaoFerramental(login: String): Flow<List<SolicitacaoFerramental>> {
+        return solicitacaoDataSource.listSolicitacaoFerramental(login).map {list->
+            list.map {solicitacaoFerramentalResponse ->
+                solicitacaoFerramentalResponse.toDomain()
+            }
+        }
     }
 
     override suspend fun updateStatusSolicitacaoFerramental(

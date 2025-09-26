@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.junior.migracaosevenmvvmcompose.data.model.SolicitacaoCheckInResponse
-import com.junior.migracaosevenmvvmcompose.data.usecase.solicitacoes.ListSolicitacaoCheckInUseCase
-import com.junior.migracaosevenmvvmcompose.data.usecase.solicitacoes.UpdateStatusSolicitacaoCheckinUseCase
+import com.junior.migracaosevenmvvmcompose.domain.usecase.solicitacoes.ListSolicitacaoCheckInUseCase
+import com.junior.migracaosevenmvvmcompose.domain.usecase.solicitacoes.UpdateStatusSolicitacaoCheckinUseCase
 import com.junior.migracaosevenmvvmcompose.domain.usecase.users.GetUserLoginFromPreferencesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
