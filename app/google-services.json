@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "366116469131",
+    "project_id": "sevensistemas-e513a",
+    "storage_bucket": "sevensistemas-e513a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366116469131:android:ade016ae193be8a5ea578e",
+        "android_client_info": {
+          "package_name": "com.junior.migracaosevenmvvmcompose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbw-OiFbOukoMmwbJpllB_Wh_qI-EiExo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366116469131:android:07cebcd88d8eecf8ea578e",
+        "android_client_info": {
+          "package_name": "com.sevenauth.authenticadortecnicoseven"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbw-OiFbOukoMmwbJpllB_Wh_qI-EiExo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366116469131:android:488168532c7729f7ea578e",
+        "android_client_info": {
+          "package_name": "com.sevensystem.seventecnico"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbw-OiFbOukoMmwbJpllB_Wh_qI-EiExo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
