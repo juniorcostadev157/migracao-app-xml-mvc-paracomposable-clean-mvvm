@@ -1,12 +1,14 @@
 package com.junior.migracaosevenmvvmcompose.presentation.screens.ferramental
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.junior.migracaosevenmvvmcompose.data.usecase.ferramental.ListFerramentalUseCase
+import com.junior.migracaosevenmvvmcompose.domain.usecase.ferramental.ListFerramentalUseCase
 import com.junior.migracaosevenmvvmcompose.domain.usecase.users.GetUserLoginFromPreferencesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,8 +19,8 @@ class FerramentalTecnicoViewModel @Inject constructor(
     private val getUserLoginFromPreferencesUseCase: GetUserLoginFromPreferencesUseCase
 ): ViewModel () {
 
-    private val _uiState = mutableStateOf(FerramentaTecnicoUiState())
-    val uiState: State<FerramentaTecnicoUiState> = _uiState
+    private val _uiState = MutableStateFlow(FerramentaTecnicoUiState())
+    val uiState: StateFlow<FerramentaTecnicoUiState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -67,9 +69,9 @@ class FerramentalTecnicoViewModel @Inject constructor(
 
         if (current.searchText.isNotBlank()){
             filtered = filtered.filter {
-                it.Nome_ferramenta!!.contains(current.searchText , ignoreCase = true) ||
-                it.Status_Validade!!.contains(current.searchText, ignoreCase = true) ||
-                it.Status_Check_in!!.contains(current.searchText, ignoreCase = true)
+                it.nomeFerramenta.contains(current.searchText , ignoreCase = true) ||
+                it.statusValidade.contains(current.searchText, ignoreCase = true) ||
+                it.statusCheckIn.contains(current.searchText, ignoreCase = true)
 
             }
         }
@@ -77,7 +79,7 @@ class FerramentalTecnicoViewModel @Inject constructor(
         filtered = if (current.selectedFilter == "Todos"){
             filtered
         }else{
-            filtered.filter { it.Status_Validade == current.selectedFilter }
+            filtered.filter { it.statusValidade == current.selectedFilter }
 
         }
             _uiState.value = current.copy(data = filtered)

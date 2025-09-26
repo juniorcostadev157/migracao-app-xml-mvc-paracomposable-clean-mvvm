@@ -1,7 +1,7 @@
 package com.junior.migracaosevenmvvmcompose.data.repository.remote
 
 import com.junior.migracaosevenmvvmcompose.data.datasource.remote.FireBaseSolicitacaoDataSource
-import com.junior.migracaosevenmvvmcompose.data.model.SolicitacaoCheckInResponse
+import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoCheckIn
 import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoEquipamentos
 import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoFerramental
 import com.junior.migracaosevenmvvmcompose.domain.model.toDomain
@@ -23,8 +23,12 @@ class SolicitacaoRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun listSolicitacaoCheckIn(login: String): Flow<List<SolicitacaoCheckInResponse>> {
-        return solicitacaoDataSource.listSolicitacaoCheckIn(login)
+    override fun listSolicitacaoCheckIn(login: String): Flow<List<SolicitacaoCheckIn>> {
+        return solicitacaoDataSource.listSolicitacaoCheckIn(login).map { list->
+            list.map { solicitacaoCheckIn->
+                solicitacaoCheckIn.toDomain()
+            }
+        }
     }
 
     override suspend fun updateStatusSolicitacao(id: String, status: String) {
