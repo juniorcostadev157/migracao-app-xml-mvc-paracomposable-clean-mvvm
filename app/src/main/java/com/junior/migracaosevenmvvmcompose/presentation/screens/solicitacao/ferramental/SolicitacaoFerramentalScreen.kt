@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.junior.migracaosevenmvvmcompose.core.contants.Constants
 import com.junior.migracaosevenmvvmcompose.core.utils.DateUtils
-import com.junior.migracaosevenmvvmcompose.data.model.SolicitacaoFerramentalResponse
+import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoFerramental
 import com.junior.migracaosevenmvvmcompose.presentation.components.AppTopBar
 import com.junior.migracaosevenmvvmcompose.presentation.theme.Black
 import com.junior.migracaosevenmvvmcompose.presentation.theme.Green
@@ -34,7 +35,7 @@ fun SolicitacaoFerramentalScreen(
 ) {
 
 
-    val uiState by viewModel.uiState
+    val uiState by viewModel.uiState.collectAsState()
 
 
 
@@ -91,7 +92,7 @@ fun SolicitacaoFerramentalScreen(
 
 
 @Composable
-fun SolicitacaoCardFerramental(solicitacao: SolicitacaoFerramentalResponse,
+fun SolicitacaoCardFerramental(solicitacao: SolicitacaoFerramental,
                                viewModel: SolicitacaoFerramentalViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
@@ -124,9 +125,9 @@ fun SolicitacaoCardFerramental(solicitacao: SolicitacaoFerramentalResponse,
             Spacer(modifier = Modifier.height(8.dp))
 
 
-            Text("Almoxarife: ${solicitacao.NomeAlmox ?: "Desconhecido"}", fontWeight = FontWeight.Medium)
-            Text("Login Técnico: ${solicitacao.LoginTecnico ?: "Desconhecido"}", fontWeight = FontWeight.Medium)
-            Text("Quant. Ferramentas: ${solicitacao.Ferramental.size}", fontWeight = FontWeight.Medium)
+            Text("Almoxarife: ${solicitacao.nomeAlmox ?: "Desconhecido"}", fontWeight = FontWeight.Medium)
+            Text("Login Técnico: ${solicitacao.loginTecnico ?: "Desconhecido"}", fontWeight = FontWeight.Medium)
+            Text("Quant. Ferramentas: ${solicitacao.ferramental?.size}", fontWeight = FontWeight.Medium)
 
             Spacer(modifier = Modifier.height(6.dp))
 
@@ -140,7 +141,7 @@ fun SolicitacaoCardFerramental(solicitacao: SolicitacaoFerramentalResponse,
                 Text("Equipamentos:", fontWeight = FontWeight.Bold, fontSize = 16.sp, modifier = Modifier.align (Alignment.CenterHorizontally))
                 Spacer(modifier = Modifier.height(4.dp))
 
-                solicitacao.Ferramental.forEach { ferramental ->
+                solicitacao.ferramental?.forEach { ferramental ->
                     Text(
                         text = "${ferramental?.nomeFerramenta}",
                         fontSize = 14.sp,
@@ -160,12 +161,12 @@ fun SolicitacaoCardFerramental(solicitacao: SolicitacaoFerramentalResponse,
             Spacer(modifier = Modifier.height(6.dp))
 
             // Data formatada
-            val dataFormatada = DateUtils.formatTimestamp(solicitacao.Data_envio)
+            val dataFormatada = DateUtils.formatTimestamp(solicitacao.dataEnvio)
 
             Text("Data: $dataFormatada", fontWeight = FontWeight.Medium)
 
 
-            Text("Status: ${solicitacao.Status ?: "Pendente"}", color = Yellow, fontWeight = FontWeight.Bold)
+            Text("Status: ${solicitacao.status ?: "Pendente"}", color = Yellow, fontWeight = FontWeight.Bold)
 
             Spacer(modifier = Modifier.height(12.dp))
 

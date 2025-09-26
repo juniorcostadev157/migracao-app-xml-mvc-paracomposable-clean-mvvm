@@ -3,7 +3,7 @@
     import androidx.lifecycle.ViewModel
     import androidx.lifecycle.viewModelScope
     import com.junior.migracaosevenmvvmcompose.domain.usecase.solicitacoes.ListSolicitacaoEquipamentosUseCase
-    import com.junior.migracaosevenmvvmcompose.data.usecase.solicitacoes.UpdateStatusSolicitacaoEquipamentosUseCase
+    import com.junior.migracaosevenmvvmcompose.domain.usecase.solicitacoes.UpdateStatusSolicitacaoEquipamentosUseCase
     import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoEquipamentos
     import com.junior.migracaosevenmvvmcompose.domain.usecase.users.GetUserLoginFromPreferencesUseCase
     import dagger.hilt.android.lifecycle.HiltViewModel

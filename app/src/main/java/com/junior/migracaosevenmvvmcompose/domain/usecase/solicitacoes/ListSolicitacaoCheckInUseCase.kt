@@ -1,4 +1,4 @@
-package com.junior.migracaosevenmvvmcompose.data.usecase.solicitacoes
+package com.junior.migracaosevenmvvmcompose.domain.usecase.solicitacoes
 
 import com.junior.migracaosevenmvvmcompose.data.model.SolicitacaoCheckInResponse
 import com.junior.migracaosevenmvvmcompose.domain.repository.SolicitacaoRepository
