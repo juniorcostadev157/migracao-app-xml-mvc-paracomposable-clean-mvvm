@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.junior.migracaosevenmvvmcompose.core.contants.Constants
 import com.junior.migracaosevenmvvmcompose.core.utils.DateUtils
-import com.junior.migracaosevenmvvmcompose.data.model.SolicitacaoCheckInResponse
+import com.junior.migracaosevenmvvmcompose.domain.model.SolicitacaoCheckIn
 import com.junior.migracaosevenmvvmcompose.presentation.components.AppTopBar
 import com.junior.migracaosevenmvvmcompose.presentation.theme.Black
 import com.junior.migracaosevenmvvmcompose.presentation.theme.Green
@@ -35,7 +36,7 @@ fun SolicitacaoCheckinScreen(
 ) {
 
 
-    val uiState by viewModel.uiState
+    val uiState by viewModel.uiState.collectAsState()
 
 
 
@@ -87,7 +88,7 @@ fun SolicitacaoCheckinScreen(
 
 @Composable
 fun SolicitacaoCardCheckin(
-    solicitacao: SolicitacaoCheckInResponse,
+    solicitacao: SolicitacaoCheckIn,
     viewModel: SolicitacaoCheckinViewModel = hiltViewModel()
 ) {
 
@@ -122,15 +123,15 @@ fun SolicitacaoCardCheckin(
 
 
             Text(
-                "Almoxarife: ${solicitacao.NomeAlmox ?: "Desconhecido"}",
+                "Almoxarife: ${solicitacao.nomeAlmox ?: "Desconhecido"}",
                 fontWeight = FontWeight.Medium
             )
             Text(
-                "Login Técnico: ${solicitacao.LoginTecnico ?: "Desconhecido"}",
+                "Login Técnico: ${solicitacao.loginTecnico ?: "Desconhecido"}",
                 fontWeight = FontWeight.Medium
             )
             Text(
-                "Quant. Ferramentas: ${solicitacao.Ferramental.size}",
+                "Quant. Ferramentas: ${solicitacao.ferramental.size}",
                 fontWeight = FontWeight.Medium
             )
 
@@ -151,14 +152,14 @@ fun SolicitacaoCardCheckin(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
 
-                solicitacao.Ferramental.forEach { ferramental ->
+                solicitacao.ferramental.forEach { ferramental ->
                     Text(
-                        "• ${ferramental?.Nome_ferramenta}",
+                        "• ${ferramental.nomeFerramenta}",
                         fontSize = 14.sp,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                     Text(
-                        text = "Status: ${ferramental?.Status_Check_in}",
+                        text = "Status: ${ferramental.statusCheckIn}",
                         fontSize = 14.sp,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
@@ -170,13 +171,13 @@ fun SolicitacaoCardCheckin(
                 Spacer(modifier = Modifier.height(6.dp))
 
                 // Data formatada
-                val dataFormatada = DateUtils.formatTimestamp(solicitacao.DataEnvio)
+                val dataFormatada = DateUtils.formatTimestamp(solicitacao.dataEnvio)
 
                 Text("Data: $dataFormatada", fontWeight = FontWeight.Medium)
 
 
                 Text(
-                    "Status: ${solicitacao.Status ?: "Pendente"}",
+                    "Status: ${solicitacao.status ?: "Pendente"}",
                     color = Yellow,
                     fontWeight = FontWeight.Bold
                 )
